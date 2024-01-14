@@ -24,7 +24,7 @@ Member.create_table()
 Schedule.create_table()
 
 L1 = Location.create("Chicago")
-L2 = Location.create("Memphis")
+L2 = Location.create("Memphis")   
 L3 = Location.create("St. Louis")
 L4 = Location.create("Louisville")
 L5 = Location.create("Seatle")
@@ -48,7 +48,6 @@ m4 = Member.create("Kathy", "Washington")
 m5 = Member.create("Patrick", "Kane")
 
 s1 = Schedule.create(1, 2, "101", "012524", "0900", "1000")
-
 
 
 ipdb.set_trace()
