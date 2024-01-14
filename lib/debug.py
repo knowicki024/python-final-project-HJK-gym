@@ -11,11 +11,11 @@ from models.member import Member
 
 print("In Debugger!")
 
-#Trainer.drop_table()
-#Location.drop_table()
-#Program.drop_table()
-#Member.drop_table()
-#Schedule.drop_table()
+Trainer.drop_table()
+Location.drop_table()
+Program.drop_table()
+Member.drop_table()
+Schedule.drop_table()
 
 Trainer.create_table()
 Location.create_table()
