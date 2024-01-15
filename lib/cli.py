@@ -71,7 +71,26 @@ def main():
 
 
 def menu():
-    monkey()
+    console.print("____________________________________", style="bold green")
+    console.print("       VVVV               VVVV        ")
+    console.print("       (__)               (__)")
+    console.print("        \ \               / /")
+    console.print("         \ \    \\|||//   / /")
+    console.print("          > \   _   _   / <")
+    console.print("           > \ / \ / \ / <", style="bold green")
+    console.print("             > \\_o_o_// <")
+    console.print("             > ( (_) ) <", style="bold green")
+    console.print("              >|     |<")
+    console.print("             / |\___/| \ ", style="bold green")
+    console.print("             / (_____) \ ")
+    console.print("             /         \ ")
+    console.print("              /   o   \ ", style="bold green")
+    console.print("               ) ___ (   ")
+    console.print("              / /   \ \  ", style="bold green")
+    console.print("             ( /     \ )")
+    console.print("             ><       ><")
+    console.print("            ///\     /\\\\", style="bold green")
+    console.print("            '''       '''", style="bold green")
     
     console.print("Welcome to JKH Gym", style="bold blue")
     console.print("Please Select an Option:", style="bold")
