@@ -52,7 +52,6 @@ class Trainer:
         CURSOR.execute(query)
         CONN.commit()
 
-    #instance method / not class method
     def save(self):
         query = """
             INSERT INTO trainers (first_name, last_name)
