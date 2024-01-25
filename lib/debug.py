@@ -21,130 +21,33 @@ Trainer.create_table()
 Location.create_table()
 Program.create_table()
 Member.create_table()
+Schedule.create_table()
 
-# Trainer.drop_table()
-# Exercise.drop_table()
-# Location.drop_table()
-# Program.drop_table()
-# Member.drop_table()
+L1 = Location.create("Chicago")
+L2 = Location.create("Memphis")   
+L3 = Location.create("St. Louis")
+L4 = Location.create("Louisville")
+L5 = Location.create("Seatle")
 
-# t1.save()
-# e1.save()
-# L1.save()
-# Boxing.save()
+t1 = Trainer.create("Bob", "Thornton") 
+t2 = Trainer.create("Tony", "Little")
+t3 = Trainer.create("Tracy", "Anderson")
+t4 = Trainer.create("Jillian", "Michales")
+t5 = Trainer.create("Bob", "Harper")
+t6 = Trainer.create("Kathy", "Smith")
 
-L1 = Location("Chicago")
-L2 = Location("Memphis")   
-L3 = Location("St. Louis")
-L4 = Location("Louisville")
-L5 = Location("Seatle")
+p1 = Program.create(1, 1, "Zumba", "Premium")
+p2 = Program.create(2, 2, "Rowing", "Basic")
+p3 = Program.create(3,3, "Cardio", "Basic")
+p4 = Program.create(1, 2, "Strength", "Premium")
 
-t1 = Trainer("Bob", "Thornton") 
-t2 = Trainer("Tony", "Little")
-t3 = Trainer("Tracy", "Anderson")
-t4 = Trainer("Jillian", "Michales")
-t5 = Trainer("Bob", "Harper")
-t6 = Trainer("Kathy", "Smith")
+m1 = Member.create("Joe", "Thornton")
+m2 = Member.create("Conor", "Bedard")
+m3 = Member.create("Brenda", "Scott")
+m4 = Member.create("Kathy", "Washington")
+m5 = Member.create("Patrick", "Kane")
 
-e1 = Exercise("Boxing")  
-e2 = Exercise("Spin Class")
-e3 = Exercise("Zumba")
-e4 = Exercise("Cycling")
-e5 = Exercise("Yoga")   
-
-LocationID = 1
-LocationName = "Chicago"
-TrainerID = 1 
-TrainerFirstName = "Bob"
-TrainerLastName = "Thornton"  
-ExerciseID = 1  
-ExerciseName = Boxing   
-MemberID = 1
-MemberFirstName = "Jeffrey"   
-MemberLastName = "Davis"  
-MemberMembership = "Basic"
-
-LocationID = 2
-LocationName = "Memphis"
-TrainerID = 3
-TrainerFirstName = "Tracy" 
-TrainerLastName = "Anderson" 
-ExerciseID = 2  
-ExerciseName = "Spin Class"   
-MemberID = 3
-MemberFirstName = "Hadil"   
-MemberLastName = "Hijazi"  
-MemberMembership = "Premium"
-
-LocationID = 4
-LocationName = "Louisville"
-TrainerID = 2 
-TrainerFirstName = "Tony" 
-TrainerLastName = "Little" 
-ExerciseID = 1  
-ExerciseName = Boxing   
-MemberID = 2
-MemberFirstName = "Katie"   
-MemberLastName = "Nowicki"  
-MemberMembership = "Premium"
-
-
-
-L1 = Location("Chicago")
-L2 = Location("Memphis")   
-L3 = Location("St. Louis")
-L4 = Location("Louisville")
-L5 = Location("Seatle")
-
-t1 = Trainer("Bob", "Thornton") 
-t2 = Trainer("Tony", "Little")
-t3 = Trainer("Tracy", "Anderson")
-t4 = Trainer("Jillian", "Michales")
-t5 = Trainer("Bob", "Harper")
-t6 = Trainer("Kathy", "Smith")
-
-e1 = Exercise("Boxing")  
-e2 = Exercise("Spin Class")
-e3 = Exercise("Zumba")
-e4 = Exercise("Cycling")
-e5 = Exercise("Yoga")   
-
-LocationID = 1
-LocationName = "Chicago"
-TrainerID = 1 
-TrainerFirstName = "Bob"
-TrainerLastName = "Thornton"  
-ExerciseID = 1  
-ExerciseName = Boxing   
-MemberID = 1
-MemberFirstName = "Jeffrey"   
-MemberLastName = "Davis"  
-MemberMembership = "Basic"
-
-LocationID = 2
-LocationName = "Memphis"
-TrainerID = 3
-TrainerFirstName = "Tracy" 
-TrainerLastName = "Anderson" 
-ExerciseID = 2  
-ExerciseName = "Spin Class"   
-MemberID = 3
-MemberFirstName = "Hadil"   
-MemberLastName = "Hijazi"  
-MemberMembership = "Premium"
-
-LocationID = 4
-LocationName = "Louisville"
-TrainerID = 2 
-TrainerFirstName = "Tony" 
-TrainerLastName = "Little" 
-ExerciseID = 1  
-ExerciseName = Boxing   
-MemberID = 2
-MemberFirstName = "Katie"   
-MemberLastName = "Nowicki"  
-MemberMembership = "Premium"
-
+s1 = Schedule.create(1, 2, "101", "012524", "0900", "1000")
 
 
 ipdb.set_trace()

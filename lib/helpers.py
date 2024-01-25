@@ -18,8 +18,6 @@ def add_member():
 
     return new_member
 
-
-
 def change_membership():
     member_id = input("Enter the member's ID: ")
     first_name = input("Enter the member's first name: ")
@@ -37,7 +35,7 @@ def change_membership():
         return
 
     if member.first_name == first_name and member.last_name == last_name:
-        new_membership_type = input("Enter new membership type (Basic/Premium): ")
+        new_membership_type = input(f"Current membership: {member.membership_type}.  Enter new membership type (Basic/Premium): ")
         if new_membership_type not in ["Basic", "Premium"]:
             print("Invalid membership type")
             return
@@ -55,7 +53,7 @@ def view_members():
     members = Member.get_all()
     for member in members:
 
-        print(f"ID: {member.id}, First Name: {member.first_name}, Last Name: {member.last_name}, Membership Type: {member.membership_type}")
+        print(f"ID: {member.id}, Name: {member.first_name} {member.last_name}, Membership Type: {member.membership_type}")
 
 
 def view_all_programs():
@@ -130,7 +128,7 @@ def delete_program():
         print("Program not found.")
         return 
     program.delete()
-    print(f"{program} has been deleted.")
+    print(f"{program} \nhas been deleted.")
 
 def delete_trainer():
     first_name = input("Enter trainers first name: ")
