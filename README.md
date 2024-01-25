@@ -20,7 +20,7 @@
      
     $ pipenv install 
     $ pipenv shell 
-    $ pip install rich
+    $ python lib/cli.py
 
 ## Collaborators:
     Jefferey

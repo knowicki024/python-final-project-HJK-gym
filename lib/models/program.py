@@ -134,11 +134,20 @@ class Program:
     
     @classmethod
     def instance_from_db(cls, row): 
-        program = cls(row[1], row[2], row[3], row[4])
-        program.id = row[0]
-        cls.all[program.id] = program
-        return program
+        program = cls.all.get(row[0])
 
+        if program:
+            program.location_id = row[1]
+            program.trainer_id = row[2]
+            program.exercise_name = row[3]
+            program.membership_required = row[4]
+        
+        else:
+            program = cls(row[1], row[2], row[3], row[4])
+            program.id = row[0]
+            cls.all[program.id] = program
+
+        return program
     
     @classmethod
     def find_by_id(cls, id):

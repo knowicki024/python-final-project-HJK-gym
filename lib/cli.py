@@ -12,7 +12,15 @@ from helpers import (
     delete_member, 
     delete_program,
     add_trainer,
-    delete_trainer
+    delete_trainer,
+    view_all_locations,
+    view_all_trainers,
+    add_scheduled_program,
+    add_location,
+    view_schedule,
+    delete_location,
+    view_schedule,
+    update_location_city
 )
 
 
@@ -30,36 +38,30 @@ def main():
             change_membership()
         elif choice == "4":
             delete_member()
-        elif choise == "5":
+        elif choice == "5":
             view_all_trainers() 
         elif choice == "6":
             add_trainer()
         elif choice == "7":
-            update_trainer():
-            pass
-        elif choice == "8":
             delete_trainer()
-        elif choice == "9":
+        elif choice == "8":
             view_all_locations()
-        elif choice == "10":
+        elif choice == "9":
             add_location()
-            pass
+        elif choice == "10":
+            update_location_city()
         elif choice == "11":
-            update_location()
-            pass
-        elif choice == "12":
             delete_location()
-            pass
-        elif choice == "13":
+        elif choice == "12":
             view_all_programs()
-        elif choice == "14":
+        elif choice == "13":
             add_program()
-        elif choice == "15":
-            update_program()
-            pass
-        elif choice == "16":
+        elif choice == "14":
             delete_program()
-
+        elif choice == "15":
+            view_schedule()
+        elif choice == "16":
+            add_scheduled_program()
         else:
             print("Invalid choice")
 
@@ -95,16 +97,16 @@ def menu():
     console.print("4. Delete Member")
     console.print("5. View Trainers")
     console.print("6. Add Trainer")
-    console.print("7. Update Trainer")
-    console.print("8. Delete Trainer")
-    console.print("9. View Locations")
-    console.print("10. Add Location")
-    console.print("11. Update Location")
-    console.print("12. Delete Location")
-    console.print("13. View All Programs")
-    console.print("14. Add New Exercise Program")
-    console.print("15. Update Existing Exercise Program")
-    console.print("16. Delete Exercise Program")
+    console.print("7. Delete Trainer")
+    console.print("8. View Locations")
+    console.print("9. Add Location")
+    console.print("10. Update Location")
+    console.print("11. Delete Location")
+    console.print("12. View All Programs")
+    console.print("13. Add New Exercise Program")
+    console.print("14. Delete Exercise Program")
+    console.print("15. View Schedule")
+    console.print("16. Schedule a Program")
 
 print("Thank you for using JKH Gym.")
 

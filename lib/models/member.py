@@ -179,14 +179,14 @@ class Member:
         )
         return None
     
-    @classmethod
-    def find_by_id(cls, id):
-        sql = "SELECT * FROM members WHERE id = ?"
-        CURSOR.execute(sql, (id,))
-        row = CURSOR.fetchone()
-        if row:
-            return cls(id=row[0], first_name=row[1], last_name=row[2], membership_type=row[3])
-        return None
+    # @classmethod
+    # def find_by_id(cls, id):
+    #     sql = "SELECT * FROM members WHERE id = ?"
+    #     CURSOR.execute(sql, (id,))
+    #     row = CURSOR.fetchone()
+    #     if row:
+    #         return cls(id=row[0], first_name=row[1], last_name=row[2], membership_type=row[3])
+    #     return None
     
 
     @classmethod 

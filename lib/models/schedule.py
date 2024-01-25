@@ -190,5 +190,8 @@ class Schedule:
         return cls.instance_from_db(row) if row else None
     
     @classmethod
-    def fetch_table(cls):
-        pass
+    def get_all(cls):
+        sql = """
+            SELECT * FROM schedules;
+        """
+        return [cls.instance_from_db(row) for row in CURSOR.execute(sql).fetchall()]

@@ -130,7 +130,7 @@ class Trainer:
         rows = CURSOR.fetchall()
         trainers = []
         for row in rows:
-            trainer = cls.new_form_db(row)
+            trainer = cls.instance_from_db(row)
             trainers.append(trainer)
         return trainers
     

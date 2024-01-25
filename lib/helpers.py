@@ -139,20 +139,69 @@ def delete_trainer():
     else:
         print("Trainer not found.")
 
+def add_location():
+    city = input("Enter the city for the new location: ")
 
+    try:
+        new_location = Location.create(city)
+        print(f'New location added: {new_location.city} with ID {new_location.id}')
+    except Exception as e:
+        print(f"An error occurred: {e}")
 
+def delete_location():
+    method = input("Delete by ID(1) or City Name(2)? Enter 1 or 2: ")
 
+    if method == "1":
+        location_id = input("Enter the location ID: ")
+        try:
+            location_id = int(location_id)
+            location = Location.find_by_id(location_id)
+            if location:
+                location.delete()
+                print(f"Location with ID {location_id} has been deleted.")
+            else:
+                print("Location not found.")
+        except ValueError:
+            print("Invalid ID format. Please enter a numerical ID.")
 
+    elif method == "2":
+        city = input("Enter the location's city name: ")
+        location = Location.find_by_name(city)
+        if location:
+            location.delete()
+            print(f"Location in {city} has been deleted.")
+        else:
+            print("Location not found or city name does not match.")
 
+    else:
+        print("Invalid option selected.")
+    
+def update_location_city():
+    location_id = input("Enter the JKH Gym ID of the location you want to update: ")
 
+    try:
+        location_id = int(location_id)
+    except ValueError:
+        print("Invalid ID format.")
+        return
 
+    location = Location.find_by_id(location_id)
+    if not location:
+        print(f"No JKH Gym found with ID: {location_id}")
+        return
 
+    print(f"Current city for JKH Gym with ID {location_id} is '{location.city}'.")
+    new_city = input("Enter the new city name: ")
 
-
-
+    try:
+        location.city = new_city
+        location.update()
+        print(f"JKH Gym ID {location_id} has been updated to city: {new_city}")
+    except Exception as e:
+        print(f"An error occurred: {e}")
 
 def view_all_locations():
-    locations = Location.get_all()
+    locations = Location.get_all_locations()
     for location in locations:
         print(f"Location Info:\n    ID: {location.id}\n    City: {location.city}\n")
 
@@ -162,28 +211,25 @@ def view_all_trainers():
         print(f"Trainer Info:\n    ID: {trainer.id}\n    Name: {trainer.first_name} {trainer.last_name}\n")
 
 def add_scheduled_program():
-    Programs.view_all_programs()
-    program = program.find_by_id(input("Enter program ID for program you want to schedule: "))
+    view_all_programs()
+    # program_id = input("Enter program ID for program you want to schedule: ")
+    # program = Program.find_by_id(program_id)
 
+    view_members()
+    member_id = input("Enter member ID for who would like to attend: ")
     room = input("Enter the room name/number this will be held in: ")
     date = input("Enter the date you want this scheduled on (MMDDYY): ")
     start_time = input("Enter the time this program will start (24hr): ")
     end_time = input("Enter the time this program will end (24hr): ")
-    Schedule.create()
-    # if location:
-    #     Trainers.view_all_trainers()
-    #     trainer = Trainer.find_by_id(input("Enter trainer ID that will lead newly scheduled program: "))
-    #     if trainer:
-    #         room = input("Enter the room name/number this will be held in: ")
-    #         if room:
-    #             date = input("Enter the date you want this scheduled on (MMDDYY): ")
-    #             if len(date) == 6:
-                    
-    #                 else:
-    #                     print("Invalid date.")
-    #         else:
-    #             print("invalid room.")
-    #     else:
-    #         print("Trainer not found.")
-    # else:
-    #     print("Location not found.")
+    new_schedule = Schedule.create(program.id, member.id, room, date, start_time, end_time)
+
+    return new_schedule
+
+def view_schedule():
+    schedules = Schedule.get_all()
+    for schedule in schedules:
+        program = Program.find_by_id(schedule.program_id)
+        member = Member.find_by_id(schedule.member_id)
+        print(f"""Schedule Info:\n        ID: {schedule.id}\n        Program Name: {program.exercise_name}
+        Member Name: {member.first_name} {member.last_name}\n        Room: {schedule.room}\n        Date: {schedule.date}
+        Start Time: {schedule.start_time}\n        End Time: {schedule.end_time}""")

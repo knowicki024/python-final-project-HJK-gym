@@ -67,17 +67,17 @@ class Location:
         CURSOR.execute(sql, (self.city, self.id))
         CONN.commit()
     
-    def delete(self):
-        sql = """
-            DELETE FROM locations
-            WHERE id = ?
-        """
+    # def delete(self):
+    #     sql = """
+    #         DELETE FROM locations
+    #         WHERE id = ?
+    #     """
+    #     CURSOR.execute(sql, (self.id,))
+    #     CONN.commit()
+    #     if self.id in type(self).all:
+    #         del type(self).all[self.id]
 
-        CURSOR.execute(sql, (self.id,))
-        CONN.commit()
-
-        del type(self).all[self.id]
-        self.id = None
+    #     self.id = None
     
     @classmethod 
     def instance_from_db(cls, row):
@@ -110,7 +110,7 @@ class Location:
         sql = """
             SELECT * FROM locations
         """
-        return [cls.new_location_db(one_row) for one_row in CURSOR.execute(sql).fetchall()]
+        return [cls.instance_from_db(one_row) for one_row in CURSOR.execute(sql).fetchall()]
     
     @classmethod 
     def find_by_name(cls, city):
@@ -135,5 +135,3 @@ class Location:
         CURSOR.execute(query, (self.city,))
         CONN.commit()
         self.id = CURSOR.lastrowid
-
-
