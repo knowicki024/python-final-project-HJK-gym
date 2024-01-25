@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # lib/debug.py
-import ipdb; 
+import ipdb
 from models.__init__ import CURSOR, CONN
 
 from models.program import Program

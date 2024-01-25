@@ -84,8 +84,6 @@ def add_program():
         return
 
     new_program = Program.create(location.id, trainer.id, exercise_name, membership_required)
-    # new_program = Program(exercise_name, location.id, trainer.id, membership_required)
-    # new_program.save()
 
     print(f"Program added: {exercise_name} at {location_name} with Trainer {trainer_first_name} {trainer_last_name}, Membership Required: {membership_required}")
     return new_program
@@ -125,12 +123,12 @@ def delete_program():
         print("Program not found.")
         return 
     program.delete()
-    print(f"{program} \nhas been deleted.")
+    print(f"Program {program.exercise_name} has been deleted.")
 
 def add_trainer():
     first_name = input("Enter trainers first name: ")
     last_name = input("Enter trainers last name: ")
-    new_trainer = Trainer.create_trainer_row(first_name, last_name)
+    new_trainer = Trainer.create(first_name, last_name)
     print(f'Trainer {new_trainer.id} {new_trainer.first_name} {new_trainer.last_name} has been added.')
 
     return new_trainer
