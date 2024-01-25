@@ -53,15 +53,14 @@ def view_members():
     members = Member.get_all()
     for member in members:
 
-        print(f"ID: {member.id}, Name: {member.first_name} {member.last_name}, Membership Type: {member.membership_type}")
-
+        print(f"Member Info:\n    ID: {member.id}\n    Name: {member.first_name} {member.last_name}\n    Membership Type: {member.membership_type}")
 
 def view_all_programs():
     programs = Program.get_all()
     for program in programs:
         location = Location.find_by_id(program.location_id)
         trainer = Trainer.find_by_id(program.trainer_id)
-        print(f"Program Info: Program ID: {program.id}, Exercise Name: {program.exercise_name}, Trainer: {trainer.first_name} {trainer.last_name}, Location: {location.city}, Membership Required: {program.membership_required}")
+        print(f"Program Info:\n    ID: {program.id}\n    Exercise: {program.exercise_name}\n    Trainer: {trainer.first_name} {trainer.last_name}\n    Location: {location.city}\n    Membership Required: {program.membership_required}")
 
 
 def add_program():
