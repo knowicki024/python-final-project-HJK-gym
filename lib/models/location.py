@@ -67,17 +67,17 @@ class Location:
         CURSOR.execute(sql, (self.city, self.id))
         CONN.commit()
     
-    # def delete(self):
-    #     sql = """
-    #         DELETE FROM locations
-    #         WHERE id = ?
-    #     """
-    #     CURSOR.execute(sql, (self.id,))
-    #     CONN.commit()
-    #     if self.id in type(self).all:
-    #         del type(self).all[self.id]
+    def delete(self):
+        sql = """
+            DELETE FROM locations
+            WHERE id = ?
+        """
+        CURSOR.execute(sql, (self.id,))
+        CONN.commit()
+        if self.id in type(self).all:
+            del type(self).all[self.id]
 
-    #     self.id = None
+        self.id = None
     
     @classmethod 
     def instance_from_db(cls, row):

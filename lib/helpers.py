@@ -212,18 +212,28 @@ def view_all_trainers():
 
 def add_scheduled_program():
     view_all_programs()
-    # program_id = input("Enter program ID for program you want to schedule: ")
-    # program = Program.find_by_id(program_id)
+    program_id = input("Enter program ID for program you want to schedule: ")
+    program = Program.find_by_id(program_id)
+
+    trainer = Trainer.find_by_id(program.trainer_id)
+    location = Location.find_by_id(program.location_id)
 
     view_members()
     member_id = input("Enter member ID for who would like to attend: ")
-    room = input("Enter the room name/number this will be held in: ")
-    date = input("Enter the date you want this scheduled on (MMDDYY): ")
-    start_time = input("Enter the time this program will start (24hr): ")
-    end_time = input("Enter the time this program will end (24hr): ")
-    new_schedule = Schedule.create(program.id, member.id, room, date, start_time, end_time)
+    member = Member.find_by_id(member_id)
+    if program.membership_required == "Premium" and member.membership_type != "Premium":
+        print("Sorry! Member needs to be premium member to attend.")
+    else:
+        room = input("Enter the room name/number this will be held in: ")
+        date = input("Enter the date you want this scheduled on (MMDDYY): ")
+        start_time = input("Enter the time this program will start (24hr): ")
+        end_time = input("Enter the time this program will end (24hr): ")
+        new_schedule = Schedule.create(program.id, member.id, room, date, start_time, end_time)
 
-    return new_schedule
+        print(f"""{program.exercise_name} has been scheduled for {new_schedule.date} from {new_schedule.start_time} to {new_schedule.end_time}.
+            Will take place in room {new_schedule.room} at the {location.city} location.  {trainer.first_name} {trainer.last_name} will be leading this one!""")
+
+        return new_schedule
 
 def view_schedule():
     schedules = Schedule.get_all()
@@ -231,5 +241,4 @@ def view_schedule():
         program = Program.find_by_id(schedule.program_id)
         member = Member.find_by_id(schedule.member_id)
         print(f"""Schedule Info:\n        ID: {schedule.id}\n        Program Name: {program.exercise_name}
-        Member Name: {member.first_name} {member.last_name}\n        Room: {schedule.room}\n        Date: {schedule.date}
-        Start Time: {schedule.start_time}\n        End Time: {schedule.end_time}""")
+        Member Name: {member.first_name} {member.last_name}\n        Room: {schedule.room}\n        Date: {schedule.date}Start Time: {schedule.start_time}\n        End Time: {schedule.end_time}""")
