@@ -83,7 +83,7 @@ class Schedule:
         return self._end_time
     @end_time.setter
     def end_time(self, value):
-        if isinstance(value, str) and len(value) == 4:
+        if isinstance(value, str) and len(value) == 4 and int(value) > int(self.start_time):
             self._end_time = value
         else:
             raise Exception("end_time must be of type string and must be 4 digits long.  Format: 24hr (HHMM).")

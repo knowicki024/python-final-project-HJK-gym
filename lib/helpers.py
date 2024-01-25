@@ -113,8 +113,6 @@ def delete_member():
         else:
             print("Member not found or details do not match.")
 
-
-
 def delete_program():
     program_id = input("Enter program ID to delete: ")
     program = Program.find_by_id(program_id)
@@ -125,8 +123,8 @@ def delete_program():
     print(f"Program {program.exercise_name} has been deleted.")
 
 def add_trainer():
-    first_name = input("Enter trainers first name: ")
-    last_name = input("Enter trainers last name: ")
+    first_name = input("Enter trainer's first name: ")
+    last_name = input("Enter trainer's last name: ")
     new_trainer = Trainer.create(first_name, last_name)
     print(f'Trainer {new_trainer.id} {new_trainer.first_name} {new_trainer.last_name} has been added.')
 
@@ -140,3 +138,52 @@ def delete_trainer():
         print(f"Trainer {first_name} has been deleted.")
     else:
         print("Trainer not found.")
+
+
+
+
+
+
+
+
+
+
+
+
+
+def view_all_locations():
+    locations = Location.get_all()
+    for location in locations:
+        print(f"Location Info:\n    ID: {location.id}\n    City: {location.city}\n")
+
+def view_all_trainers():
+    trainers = Trainer.get_all()
+    for trainer in trainers:
+        print(f"Trainer Info:\n    ID: {trainer.id}\n    Name: {trainer.first_name} {trainer.last_name}\n")
+
+def add_scheduled_program():
+    Programs.view_all_programs()
+    program = program.find_by_id(input("Enter program ID for program you want to schedule: "))
+
+    room = input("Enter the room name/number this will be held in: ")
+    date = input("Enter the date you want this scheduled on (MMDDYY): ")
+    start_time = input("Enter the time this program will start (24hr): ")
+    end_time = input("Enter the time this program will end (24hr): ")
+    Schedule.create()
+    # if location:
+    #     Trainers.view_all_trainers()
+    #     trainer = Trainer.find_by_id(input("Enter trainer ID that will lead newly scheduled program: "))
+    #     if trainer:
+    #         room = input("Enter the room name/number this will be held in: ")
+    #         if room:
+    #             date = input("Enter the date you want this scheduled on (MMDDYY): ")
+    #             if len(date) == 6:
+                    
+    #                 else:
+    #                     print("Invalid date.")
+    #         else:
+    #             print("invalid room.")
+    #     else:
+    #         print("Trainer not found.")
+    # else:
+    #     print("Location not found.")

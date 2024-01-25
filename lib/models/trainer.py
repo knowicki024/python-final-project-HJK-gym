@@ -1,4 +1,5 @@
 from models.__init__ import CURSOR, CONN
+from models.member import Member
 
 class Trainer:
 
@@ -66,6 +67,8 @@ class Trainer:
     def create(cls, first_name, last_name):
         trainer = cls(first_name, last_name)
         trainer.save()
+        
+        Member.create(first_name, last_name, "Premium")
 
         return trainer
     
