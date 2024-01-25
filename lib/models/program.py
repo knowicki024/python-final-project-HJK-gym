@@ -16,8 +16,6 @@ class Program:
         self.trainer_id = trainer_id
         self.exercise_name = exercise_name
         self.membership_required = membership_required
-        Program.all.append(self)
-
 
     def __repr__(self):
         return (
@@ -164,20 +162,3 @@ class Program:
             SELECT * FROM programs;
         """
         return [cls.instance_from_db(row) for row in CURSOR.execute(sql).fetchall()]
-
-
-
-    # @classmethod
-    # def get_all(cls):
-    #     sql = """
-    #         SELECT * FROM programs;
-    #     """
-    #     CURSOR.execute(sql)
-    #     rows = CURSOR.fetchall()
-    #     programs = []
-    #     for row in rows:
-    #         program = cls.instance_from_db(row)
-    #         programs.append(program)
-    #     return programs
-    
-    

@@ -118,7 +118,7 @@ class Member:
 
         CURSOR.execute(sql, (self.first_name, self.last_name, self.membership_type, self.id))
         CONN.commit()
-    
+
     def delete(self):
         if self.id is not None:
             try:
