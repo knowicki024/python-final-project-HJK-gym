@@ -22,6 +22,13 @@
     $ pipenv shell 
     $ pip install rich
 
+once those are done, you will put 
+
+  $ python3 lib/cli.py 
+
+to start the program!
+
+
 ## Collaborators:
     Jefferey
     Hadil
