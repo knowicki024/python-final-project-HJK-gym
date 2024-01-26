@@ -9,6 +9,12 @@ def exit_program():
     print("Goodbye!")
     exit()
 
+def view_members():
+    members = Member.get_all()
+    for member in members:
+
+        print(f"Member Info:\n    ID: {member.id}\n    Name: {member.first_name} {member.last_name}\n    Membership Type: {member.membership_type}\n")
+
 def add_member():
     first_name = input("Enter your first name: ")
     last_name = input("Enter your last name: ")
@@ -48,47 +54,6 @@ def change_membership():
     else:
         print("Member details do not match.")
 
-
-def view_members():
-    members = Member.get_all()
-    for member in members:
-
-        print(f"Member Info:\n    ID: {member.id}\n    Name: {member.first_name} {member.last_name}\n    Membership Type: {member.membership_type}\n")
-
-def view_all_programs():
-    programs = Program.get_all()
-    for program in programs:
-        location = Location.find_by_id(program.location_id)
-        trainer = Trainer.find_by_id(program.trainer_id)
-        print(f"Program Info:\n    ID: {program.id}\n    Exercise: {program.exercise_name}\n    Trainer: {trainer.first_name} {trainer.last_name}\n    Location: {location.city}\n    Membership Required: {program.membership_required}\n")
-
-
-def add_program():
-    exercise_name = input("Enter name of class/exercise: ")
-    view_all_trainers()
-    trainer_first_name = input("Enter trainer's first name: ")
-    trainer_last_name = input("Enter trainer's last name: ")
-    view_all_locations()
-    location_name = input("Enter location: ")
-    membership_required = input("Which membership level is required: Basic or Premium? ")
-
-    trainer = Trainer.find_by_name(trainer_first_name, trainer_last_name)
-    location = Location.find_by_name(location_name)
-
-    if not trainer:
-        print("No trainer registered by that name.")
-    elif not location:
-        print("This location does not exist.")
-        return
-    if membership_required not in ["Basic", "Premium"]:
-        print("Invalid membership type.")
-        return
-
-    new_program = Program.create(location.id, trainer.id, exercise_name, membership_required)
-
-    print(f"Program added: {exercise_name} at {location_name} with Trainer {trainer_first_name} {trainer_last_name}, Membership Required: {membership_required}")
-    return new_program
-
 def delete_member():
     method = input("Delete by ID(1) or Name(2)? Enter 1 or 2: ")
 
@@ -115,14 +80,10 @@ def delete_member():
         else:
             print("Member not found or details do not match.")
 
-def delete_program():
-    program_id = input("Enter program ID to delete: ")
-    program = Program.find_by_id(program_id)
-    if not program:
-        print("Program not found.")
-        return 
-    program.delete()
-    print(f"Program {program.exercise_name} has been deleted.")
+def view_all_trainers():
+    trainers = Trainer.get_all()
+    for trainer in trainers:
+        print(f"Trainer Info:\n    ID: {trainer.id}\n    Name: {trainer.first_name} {trainer.last_name}\n")
 
 def add_trainer():
     first_name = input("Enter trainer's first name: ")
@@ -141,12 +102,41 @@ def delete_trainer():
     else:
         print("Trainer not found.")
 
+def view_all_locations():
+    locations = Location.get_all_locations()
+    for location in locations:
+        print(f"Location Info:\n    ID: {location.id}\n    City: {location.city}\n")
+
 def add_location():
     city = input("Enter the city for the new location: ")
 
     try:
         new_location = Location.create(city)
         print(f'New location added: {new_location.city} with ID {new_location.id}')
+    except Exception as e:
+        print(f"An error occurred: {e}")
+
+def update_location_city():
+    location_id = input("Enter the JKH Gym ID of the location you want to update: ")
+
+    try:
+        location_id = int(location_id)
+    except ValueError:
+        print("Invalid ID format.")
+        return
+
+    location = Location.find_by_id(location_id)
+    if not location:
+        print(f"No JKH Gym found with ID: {location_id}")
+        return
+
+    print(f"Current city for JKH Gym with ID {location_id} is '{location.city}'.")
+    new_city = input("Enter the new city name: ")
+
+    try:
+        location.city = new_city
+        location.update()
+        print(f"JKH Gym ID {location_id} has been updated to city: {new_city}")
     except Exception as e:
         print(f"An error occurred: {e}")
 
@@ -177,40 +167,84 @@ def delete_location():
 
     else:
         print("Invalid option selected.")
-    
-def update_location_city():
-    location_id = input("Enter the JKH Gym ID of the location you want to update: ")
 
-    try:
-        location_id = int(location_id)
-    except ValueError:
-        print("Invalid ID format.")
+def view_all_programs():
+    programs = Program.get_all()
+    # programs = Program.fetch_all()
+    for program in programs:
+        location = Location.find_by_id(program.location_id)
+        trainer = Trainer.find_by_id(program.trainer_id)
+        if not trainer and not location:
+            print(f"Program Info:\n    ID: {program.id}\n    Exercise: {program.exercise_name}\n    Trainer: Unkown\n    Location: Unknown\n    Membership Required:  {program.membership_required}\n")
+        elif trainer and not location:
+            print(f"Program Info:\n    ID: {program.id}\n    Exercise: {program.exercise_name}\n    Trainer: {trainer.first_name} {trainer.last_name}\n    Location: Unknown\n    Membership Required: {program.membership_required}\n")
+        elif not trainer and location:
+            print(f"Program Info:\n    ID: {program.id}\n    Exercise: {program.exercise_name}\n    Trainer: Unkown\n    Location: {location.city}\n    Membership Required: {program.membership_required}\n")
+        else:
+            print(f"Program Info:\n    ID: {program.id}\n    Exercise: {program.exercise_name}\n    Trainer: {trainer.first_name} {trainer.last_name}\n    Location: {location.city}\n    Membership Required: {program.membership_required}\n")
+
+def add_program():
+    exercise_name = input("Enter name of class/exercise: ")
+    view_all_trainers()
+    trainer_first_name = input("Enter trainer's first name: ")
+    trainer_last_name = input("Enter trainer's last name: ")
+    view_all_locations()
+    location_name = input("Enter location: ")
+    membership_required = input("Which membership level is required: Basic or Premium? ")
+
+    trainer = Trainer.find_by_name(trainer_first_name, trainer_last_name)
+    location = Location.find_by_name(location_name)
+
+    if not trainer:
+        print("No trainer registered by that name.")
+    elif not location:
+        print("This location does not exist.")
+        return
+    if membership_required not in ["Basic", "Premium"]:
+        print("Invalid membership type.")
         return
 
-    location = Location.find_by_id(location_id)
-    if not location:
-        print(f"No JKH Gym found with ID: {location_id}")
-        return
+    new_program = Program.create(location.id, trainer.id, exercise_name, membership_required)
 
-    print(f"Current city for JKH Gym with ID {location_id} is '{location.city}'.")
-    new_city = input("Enter the new city name: ")
+    print(f"Program added: {exercise_name} at {location_name} with Trainer {trainer_first_name} {trainer_last_name}, Membership Required: {membership_required}")
+    return new_program
 
-    try:
-        location.city = new_city
-        location.update()
-        print(f"JKH Gym ID {location_id} has been updated to city: {new_city}")
-    except Exception as e:
-        print(f"An error occurred: {e}")
+def delete_program():
+    program_id = input("Enter program ID to delete: ")
+    program = Program.find_by_id(program_id)
+    if not program:
+        print("Program not found.")
+        return 
+    program.delete()
+    print(f"Program {program.exercise_name} has been deleted.")
 
-def view_all_locations():
-    locations = Location.get_all_locations()
-    for location in locations:
-        print(f"Location Info:\n    ID: {location.id}\n    City: {location.city}\n")
+def get_all_programs_by_trainer():
+    programs = Program.get_all()
+    trainer_id = input("Enter trainer ID to see all of the programs they are leading: ")
+    trainer = Trainer.find_by_id(trainer_id)
+    print(f"{trainer.first_name} {trainer.last_name} leads the following programs:")
+    for program in programs:
+        if program.trainer_id == int(trainer_id):
+            print(program)
 
-def view_all_trainers():
-    trainers = Trainer.get_all()
-    for trainer in trainers:
-        print(f"Trainer Info:\n    ID: {trainer.id}\n    Name: {trainer.first_name} {trainer.last_name}\n")
+def view_schedule():
+    schedules = Schedule.get_all()
+    for schedule in schedules:
+        program = Program.find_by_id(schedule.program_id)
+        member = Member.find_by_id(schedule.member_id)
+
+        if member and program:
+            print(f"""Schedule Info:\n        ID: {schedule.id}\n        Program Name: {program.exercise_name}
+            Member Name: {member.first_name} {member.last_name}\n        Room: {schedule.room}\n        Date: {schedule.date}\n        Start Time: {schedule.start_time}\n        End Time: {schedule.end_time}\n""")
+        elif not member and program:
+            print(f"""Schedule Info:\n        ID: {schedule.id}\n        Program Name: {program.exercise_name}
+            Member Name: Unknown\n        Room: {schedule.room}\n        Date: {schedule.date}\n        Start Time: {schedule.start_time}\n        End Time: {schedule.end_time}\n""")    
+        elif member and not program:
+            print(f"""Schedule Info:\n        ID: {schedule.id}\n        Program Name: Unkown
+            Member Name: {member.first_name} {member.last_name}\n        Room: {schedule.room}\n        Date: {schedule.date}\n        Start Time: {schedule.start_time}\n        End Time: {schedule.end_time}\n""")
+        else:
+            print(f"""Schedule Info:\n        ID: {schedule.id}\n        Program Name: Unkown
+            Member Name: Unknown\n        Room: {schedule.room}\n        Date: {schedule.date}\n        Start Time: {schedule.start_time}\n        End Time: {schedule.end_time}\n""")     
 
 def add_scheduled_program():
     view_all_programs()
@@ -235,11 +269,3 @@ def add_scheduled_program():
         print(f"""{member.first_name} {member.last_name} is set to attend {program.exercise_name} on {new_schedule.date} from {new_schedule.start_time} to {new_schedule.end_time}.  Will take place in room {new_schedule.room} at the {location.city} location.  {trainer.first_name} {trainer.last_name} will be leading this one!""")
 
         return new_schedule
-
-def view_schedule():
-    schedules = Schedule.get_all()
-    for schedule in schedules:
-        program = Program.find_by_id(schedule.program_id)
-        member = Member.find_by_id(schedule.member_id)
-        print(f"""Schedule Info:\n        ID: {schedule.id}\n        Program Name: {program.exercise_name}
-        Member Name: {member.first_name} {member.last_name}\n        Room: {schedule.room}\n        Date: {schedule.date}\n        Start Time: {schedule.start_time}\n        End Time: {schedule.end_time}\n""")

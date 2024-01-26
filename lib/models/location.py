@@ -49,6 +49,15 @@ class Location:
 
         self.id = CURSOR.lastrowid 
         type(self).all[self.id] = self
+    
+    # def save(self):
+    #     query = """
+    #         INSERT INTO locations (city)
+    #         VALUES (?);
+    #     """
+    #     CURSOR.execute(query, (self.city,))
+    #     CONN.commit()
+    #     self.id = CURSOR.lastrowid
 
     @classmethod 
     def create(cls, city):
@@ -126,12 +135,3 @@ class Location:
             city = row[1],
             id = row[0]
         )
-
-    def save(self):
-        query = """
-            INSERT INTO locations (city)
-            VALUES (?);
-        """
-        CURSOR.execute(query, (self.city,))
-        CONN.commit()
-        self.id = CURSOR.lastrowid

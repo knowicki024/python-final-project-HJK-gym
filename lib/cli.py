@@ -21,7 +21,8 @@ from helpers import (
     view_schedule,
     delete_location,
     view_schedule,
-    update_location_city
+    update_location_city,
+    get_all_programs_by_trainer
 )
 
 
@@ -141,6 +142,8 @@ def trainer_main():
             add_trainer()
         elif choice == "4":
             delete_trainer()
+        elif choice == "5":
+            get_all_programs_by_trainer()
 
 def trainer_menu():
     console.print("____________________________________", style="bold green")
@@ -171,6 +174,7 @@ def trainer_menu():
     console.print("2. View All Trainers")
     console.print("3. Add a Trainer")
     console.print("4. Delete a Trainer")
+    console.print("5. Lookup a Trainer's programs")
 
 def location_main():
     while True:

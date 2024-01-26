@@ -1,6 +1,3 @@
-
-import sqlite3
-
 from models.__init__ import CURSOR, CONN
 
 from models.location import Location
@@ -31,7 +28,7 @@ class Program:
         return self._location_id
     @location_id.setter
     def location_id(self, value):
-        if isinstance(value, int) and Location.find_by_id(value):
+        if isinstance(value, int):
             self._location_id = value
         else:
             raise Exception("location_id must reference a location in the database.")
@@ -41,7 +38,7 @@ class Program:
         return self._trainer_id
     @trainer_id.setter
     def trainer_id(self, value):
-        if isinstance(value, int) and Trainer.find_by_id(value):
+        if isinstance(value, int):
             self._trainer_id = value
         else:
             raise Exception("trainer_id must reference a trainer in the database.")
@@ -160,10 +157,6 @@ class Program:
         row = CURSOR.execute(sql, (id,)).fetchone()
 
         return cls.instance_from_db(row) if row else None
-    
-    @classmethod
-    def fetch_table(cls):
-        pass
 
     @classmethod
     def get_all(cls):
@@ -171,3 +164,14 @@ class Program:
             SELECT * FROM programs;
         """
         return [cls.instance_from_db(row) for row in CURSOR.execute(sql).fetchall()]
+    
+    # @classmethod
+    # def fetch_all(cls):
+    #     sql = """
+    #         SELECT programs.id, programs.location_id, programs.trainer_id, programs.exercise_name, programs.membership_required
+    #         FROM programs
+    #         LEFT OUTER JOIN trainers
+    #         ON programs.trainer_id = trainers.id;
+    #     """
+
+    #     return CURSOR.execute(sql).fetchall()

@@ -33,7 +33,7 @@ class Schedule:
         return self._program_id
     @program_id.setter
     def program_id(self, value):
-        if isinstance(value, int) and Program.find_by_id(value):
+        if isinstance(value, int):
             self._program_id = value
         else:
             raise Exception("program_id must reference a program in the database.")
@@ -43,7 +43,7 @@ class Schedule:
         return self._member_id
     @member_id.setter
     def member_id(self, value):
-        if isinstance(value, int) and Member.find_by_id(value):
+        if isinstance(value, int):
             self._member_id = value
         else:
             raise Exception("member_id must reference a member in the database.")
