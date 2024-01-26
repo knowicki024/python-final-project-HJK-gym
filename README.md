@@ -16,6 +16,7 @@
     $ pipenv shell 
     $ python lib/cli.py
 
+
   Once program is running, can fill with test data by navigating to the dev menu and selecting the option "Put in Test Data":
     $6
     $2
@@ -31,7 +32,7 @@
 ## Collaborators:
     Jefferey
     Hadil
-    Katie 
+    Katie
 
 ## ERD
 [Imgur](https://i.imgur.com/tn83vF5.png)
@@ -42,3 +43,11 @@
 ## Trello Board:
 https://trello.com/b/KyUFcJNo/phase-3
 
+## Futre Plans
+- Implement full CRUD in Schedule class
+- Expand the Location class to contain more than the city property and further utiliza those 
+- Expand the Schedule class to do more than basic CRUD
+  - Such as, being able to look up all of the instances of Schedule a member is attached to
+- Create a GUI that will contain calendar and pop up when selecting the date when adding a new instance of Schedule
+- Have unique designs for each sub menu
+- Further explore adding functions to helpers.py
