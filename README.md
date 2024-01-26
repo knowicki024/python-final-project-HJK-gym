@@ -22,13 +22,28 @@
     $ pipenv shell 
     $ python lib/cli.py
 
+  Once program is running, can fill with test data by navigating to the dev menu and selecting the option "Put in Test Data":
+    $6
+    $2
+  
+  If you want to clear data that was inputted from a few runs and restart to test data, select the option to "Reset with Test Data" 
+    $6
+    $3
+  
+  If you want to just clear all data and start with no data, navigate to the dev menu and select "Clear All Data"
+    $6
+    $4
+
 ## Collaborators:
     Jefferey
     Hadil
     Katie 
 
-## ERD Link
-https://dbdiagram.io/d/Gym-65ae9eeaac844320ae768ffa
+## ERD
+[Imgur](https://i.imgur.com/tn83vF5.png)
+
+## drawio
+[Imgur](https://i.imgur.com/pjEmMsh.png)
 
 ## Trello Board:
 https://trello.com/b/KyUFcJNo/phase-3

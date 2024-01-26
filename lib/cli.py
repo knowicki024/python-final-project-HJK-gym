@@ -1,6 +1,7 @@
 # lib/cli.py
 from rich.console import Console
 console = Console()
+from seed import seed_database, reseed_database, clear_data
 
 from helpers import (
     exit_program,
@@ -31,37 +32,17 @@ def main():
         if choice == "0":
             exit_program()
         elif choice == "1":
-            view_members()
+            member_main()
         elif choice == "2":
-            add_member()
+            trainer_main()
         elif choice == "3":
-            change_membership()
+            location_main()
         elif choice == "4":
-            delete_member()
+            program_main()
         elif choice == "5":
-            view_all_trainers() 
+            schedule_main()
         elif choice == "6":
-            add_trainer()
-        elif choice == "7":
-            delete_trainer()
-        elif choice == "8":
-            view_all_locations()
-        elif choice == "9":
-            add_location()
-        elif choice == "10":
-            update_location_city()
-        elif choice == "11":
-            delete_location()
-        elif choice == "12":
-            view_all_programs()
-        elif choice == "13":
-            add_program()
-        elif choice == "14":
-            delete_program()
-        elif choice == "15":
-            view_schedule()
-        elif choice == "16":
-            add_scheduled_program()
+            dev_main()
         else:
             print("Invalid choice")
 
@@ -89,24 +70,258 @@ def menu():
     console.print("            '''       '''", style="bold green")
     
     console.print("Welcome to JKH Gym", style="bold blue")
-    console.print("Please select an option:", style="bold")
-    console.print("0. Exit the program")
-    console.print("1. View Members")
-    console.print("2. Add New Member")
-    console.print("3. Change Membership Plan")
-    console.print("4. Delete Member")
-    console.print("5. View Trainers")
-    console.print("6. Add Trainer")
-    console.print("7. Delete Trainer")
-    console.print("8. View Locations")
-    console.print("9. Add Location")
-    console.print("10. Update Location")
-    console.print("11. Delete Location")
-    console.print("12. View All Programs")
-    console.print("13. Add New Exercise Program")
-    console.print("14. Delete Exercise Program")
-    console.print("15. View Schedule")
-    console.print("16. Schedule a Program")
+    console.print("Please Select an Option:", style="bold")
+    console.print("0. Exit the Program")
+    console.print("1. View The Member Menu")
+    console.print("2. View The Trainer Menu")
+    console.print("3. View The Location Menu")
+    console.print("4. View The Program Menu")
+    console.print("5. View The Schedule Menu")
+    console.print("6. Access Dev Menu")
+
+def member_main():
+    while True:
+        member_menu()
+        choice = input("> ")
+        if choice == "0":
+            exit_program()
+        elif choice == "1":
+            main()
+        elif choice == "2":
+            view_members()
+        elif choice == "3":
+            add_member()
+        elif choice == "4":
+            change_membership()
+        elif choice == "5":
+            delete_member()
+
+def member_menu():
+    console.print("____________________________________", style="bold green")
+    console.print("       VVVV               VVVV        ")
+    console.print("       (__)               (__)")
+    console.print("        \ \               / /")
+    console.print("         \ \   \\|||//   / /")
+    console.print("          > \   _   _   / <")
+    console.print("           > \ / \ / \ / <", style="bold green")
+    console.print("             > \\_o_o_// <")
+    console.print("             > ( (_) ) <", style="bold green")
+    console.print("              >|     |<")
+    console.print("             / |\___/| \ ", style="bold green")
+    console.print("             / (_____) \ ")
+    console.print("             /         \ ")
+    console.print("              /   o   \ ", style="bold green")
+    console.print("               ) ___ (   ")
+    console.print("              / /   \ \  ", style="bold green")
+    console.print("             ( /     \ )")
+    console.print("             ><       ><")
+    console.print("            ///\     /\\\\", style="bold green")
+    console.print("            '''       '''", style="bold green")
+    
+    console.print("Here is The Member Menu", style="bold blue")
+    console.print("Please Select an Option:", style="bold")
+    console.print("0. Exit The Program")
+    console.print("1. Go Back to The Main Menu")
+    console.print("2. View All Members")
+    console.print("3. Add a Member")
+    console.print("4. Change a Member's Plan")
+    console.print("5. Delete a Member")
+
+def trainer_main():
+    while True:
+        trainer_menu()
+        choice = input("> ")
+        if choice == "0":
+            exit_program()
+        elif choice == "1":
+            main()
+        elif choice == "2":
+            view_all_trainers()
+        elif choice == "3":
+            add_trainer()
+        elif choice == "4":
+            delete_trainer()
+
+def trainer_menu():
+    console.print("____________________________________", style="bold green")
+    console.print("       VVVV               VVVV        ")
+    console.print("       (__)               (__)")
+    console.print("        \ \               / /")
+    console.print("         \ \   \\|||//   / /")
+    console.print("          > \   _   _   / <")
+    console.print("           > \ / \ / \ / <", style="bold green")
+    console.print("             > \\_o_o_// <")
+    console.print("             > ( (_) ) <", style="bold green")
+    console.print("              >|     |<")
+    console.print("             / |\___/| \ ", style="bold green")
+    console.print("             / (_____) \ ")
+    console.print("             /         \ ")
+    console.print("              /   o   \ ", style="bold green")
+    console.print("               ) ___ (   ")
+    console.print("              / /   \ \  ", style="bold green")
+    console.print("             ( /     \ )")
+    console.print("             ><       ><")
+    console.print("            ///\     /\\\\", style="bold green")
+    console.print("            '''       '''", style="bold green")
+    
+    console.print("Here is The Trainer Menu", style="bold blue")
+    console.print("Please Select an Option:", style="bold")
+    console.print("0. Exit The Program")
+    console.print("1. Go Back to The Main Menu")
+    console.print("2. View All Trainers")
+    console.print("3. Add a Trainer")
+    console.print("4. Delete a Trainer")
+
+def location_main():
+    while True:
+        location_menu()
+        choice = input("> ")
+        if choice == "0":
+            exit_program()
+        elif choice == "1":
+            main()
+        elif choice == "2":
+            view_all_locations()
+        elif choice == "3":
+            add_location()
+        elif choice == "4":
+            update_location_city()
+        elif choice == "5":
+            delete_location()
+
+def location_menu():
+    console.print("____________________________________", style="bold green")
+    console.print("       VVVV               VVVV        ")
+    console.print("       (__)               (__)")
+    console.print("        \ \               / /")
+    console.print("         \ \   \\|||//   / /")
+    console.print("          > \   _   _   / <")
+    console.print("           > \ / \ / \ / <", style="bold green")
+    console.print("             > \\_o_o_// <")
+    console.print("             > ( (_) ) <", style="bold green")
+    console.print("              >|     |<")
+    console.print("             / |\___/| \ ", style="bold green")
+    console.print("             / (_____) \ ")
+    console.print("             /         \ ")
+    console.print("              /   o   \ ", style="bold green")
+    console.print("               ) ___ (   ")
+    console.print("              / /   \ \  ", style="bold green")
+    console.print("             ( /     \ )")
+    console.print("             ><       ><")
+    console.print("            ///\     /\\\\", style="bold green")
+    console.print("            '''       '''", style="bold green")
+
+    console.print("0. Exit The Program")
+    console.print("1. Go Back to The Main Menu")
+    console.print("2. View All Locations")
+    console.print("3. Add a Location")
+    console.print("4. Update a Location")
+    console.print("5. Delete a Location")
+
+def program_main():
+    while True:
+        program_menu()
+        choice = input("> ")
+        if choice == "0":
+            exit_program()
+        elif choice == "1":
+            main()
+        elif choice == "2":
+            view_all_programs()
+        elif choice == "3":
+            add_program()
+        elif choice == "4":
+            delete_program()
+
+def program_menu():
+    console.print("____________________________________", style="bold green")
+    console.print("       VVVV               VVVV        ")
+    console.print("       (__)               (__)")
+    console.print("        \ \               / /")
+    console.print("         \ \   \\|||//   / /")
+    console.print("          > \   _   _   / <")
+    console.print("           > \ / \ / \ / <", style="bold green")
+    console.print("             > \\_o_o_// <")
+    console.print("             > ( (_) ) <", style="bold green")
+    console.print("              >|     |<")
+    console.print("             / |\___/| \ ", style="bold green")
+    console.print("             / (_____) \ ")
+    console.print("             /         \ ")
+    console.print("              /   o   \ ", style="bold green")
+    console.print("               ) ___ (   ")
+    console.print("              / /   \ \  ", style="bold green")
+    console.print("             ( /     \ )")
+    console.print("             ><       ><")
+    console.print("            ///\     /\\\\", style="bold green")
+    console.print("            '''       '''", style="bold green")
+
+    console.print("0. Exit The Program")
+    console.print("1. Go Back to The Main Menu")
+    console.print("2. View All Programs")
+    console.print("3. Add a Program")
+    console.print("4. Delete a Program")
+
+def schedule_main():
+    while True:
+        schedule_menu()
+        choice = input("> ")
+        if choice == "0":
+            exit_program()
+        elif choice == "1":
+            main()
+        elif choice == "2":
+            view_schedule()
+        elif choice == "3":
+            add_scheduled_program()
+
+def schedule_menu():
+    console.print("____________________________________", style="bold green")
+    console.print("       VVVV               VVVV        ")
+    console.print("       (__)               (__)")
+    console.print("        \ \               / /")
+    console.print("         \ \   \\|||//   / /")
+    console.print("          > \   _   _   / <")
+    console.print("           > \ / \ / \ / <", style="bold green")
+    console.print("             > \\_o_o_// <")
+    console.print("             > ( (_) ) <", style="bold green")
+    console.print("              >|     |<")
+    console.print("             / |\___/| \ ", style="bold green")
+    console.print("             / (_____) \ ")
+    console.print("             /         \ ")
+    console.print("              /   o   \ ", style="bold green")
+    console.print("               ) ___ (   ")
+    console.print("              / /   \ \  ", style="bold green")
+    console.print("             ( /     \ )")
+    console.print("             ><       ><")
+    console.print("            ///\     /\\\\", style="bold green")
+    console.print("            '''       '''", style="bold green")
+
+    console.print("0. Exit The Program")
+    console.print("1. Go Back to The Main Menu")
+    console.print("2. View Schedule")
+    console.print("3. Schedule a Program")
+
+def dev_main():
+    while True:
+        dev_menu()
+        choice = input("> ")
+        if choice == "0":
+            exit_program()
+        elif choice == "1":
+            main()
+        elif choice == "2":
+            seed_database()
+        elif choice == "3":
+            reseed_database()
+        elif choice == "4":
+            clear_data()
+
+def dev_menu():
+    console.print("0. Exit The Program")
+    console.print("1. Go Back to The Main Menu")
+    console.print("2. Put in Test Data")
+    console.print("3. Reset with Test Data")
+    console.print("4. Clear All Data")
 
 print("Thank you for using JKH Gym.")
 
