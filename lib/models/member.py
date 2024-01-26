@@ -161,6 +161,15 @@ class Member:
 
         return cls.instance_from_db(row) if row else None
     
+    # @classmethod
+    # def find_by_id(cls, id):
+    #     sql = "SELECT * FROM members WHERE id = ?"
+    #     CURSOR.execute(sql, (id,))
+    #     row = CURSOR.fetchone()
+    #     if row:
+    #         return cls(id=row[0], first_name=row[1], last_name=row[2], membership_type=row[3])
+    #     return None
+    
     @classmethod 
     def find_by_name(cls, first_name, last_name):
         sql = """
@@ -177,17 +186,7 @@ class Member:
             last_name = row[2],
             membership_type = row[3]
         )
-        return None
-    
-    @classmethod
-    def find_by_id(cls, id):
-        sql = "SELECT * FROM members WHERE id = ?"
-        CURSOR.execute(sql, (id,))
-        row = CURSOR.fetchone()
-        if row:
-            return cls(id=row[0], first_name=row[1], last_name=row[2], membership_type=row[3])
-        return None
-    
+        return None  
 
     @classmethod 
     def get_all(cls):
@@ -196,4 +195,3 @@ class Member:
             ORDER BY last_name, first_name
         """
         return [cls.instance_from_db(one_row) for one_row in CURSOR.execute(sql).fetchall()]
-    

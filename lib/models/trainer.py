@@ -1,4 +1,5 @@
 from models.__init__ import CURSOR, CONN
+from models.member import Member
 
 class Trainer:
 
@@ -66,6 +67,8 @@ class Trainer:
     def create(cls, first_name, last_name):
         trainer = cls(first_name, last_name)
         trainer.save()
+        
+        Member.create(first_name, last_name, "Premium")
 
         return trainer
     
@@ -90,6 +93,20 @@ class Trainer:
 
         del type(self).all[self.id]
         self.id = None
+
+    @classmethod
+    def delete_by_name(cls, first_name, last_name):
+        sql = """
+            DELETE FROM trainers
+            WHERE first_name = ? AND last_name = ?;
+        """
+        CURSOR.execute(sql, (first_name, last_name))
+        affected_rows = CURSOR.rowcount
+        CONN.commit()
+        if affected_rows > 0:
+            print(f"Trainer {first_name} {last_name} deleted successfully.")
+        else:
+            print("Trainer not found or already deleted.")
     
     @classmethod
     def instance_from_db(cls, row):
@@ -106,6 +123,16 @@ class Trainer:
 
         return trainer
     
+    # @classmethod
+    # def new_form_db(cls, row):
+    #     trainer = cls(
+    #         first_name = row[1], #row at index 1 is the name
+    #         last_name = row[2]
+    #         id = row[0] #row at index 0 is the id
+    #     )
+
+    #     return trainer
+    
     @classmethod
     def find_by_id(cls, id):
         sql = """
@@ -117,32 +144,6 @@ class Trainer:
         row = CURSOR.execute(sql, (id,)).fetchone()
 
         return cls.instance_from_db(row) if row else None
-    
-    @classmethod
-    def get_all(cls):
-        sql = """
-            SELECT * FROM trainers;
-        """
-        CURSOR.execute(sql)
-        rows = CURSOR.fetchall()
-        trainers = []
-        for row in rows:
-            trainer = cls.new_form_db(row)
-            trainers.append(trainer)
-        return trainers
-    
-    def display_info(self):
-        print(f"Trainer Name: {self.first_name} {self.last_name}")
-
-    # @classmethod
-    # def new_form_db(cls, row):
-    #     trainer = cls(
-    #         first_name = row[1], #row at index 1 is the name
-    #         last_name = row[2]
-    #         id = row[0] #row at index 0 is the id
-    #     )
-
-    #     return trainer
 
     @classmethod
     def find_by_name(cls, first_name, last_name):
@@ -157,18 +158,16 @@ class Trainer:
             return cls.instance_from_db(row)
         else:
             return None
-        
+    
     @classmethod
-    def delete_by_name(cls, first_name, last_name):
+    def get_all(cls):
         sql = """
-            DELETE FROM trainers
-            WHERE first_name = ? AND last_name = ?;
+            SELECT * FROM trainers;
         """
-        CURSOR.execute(sql, (first_name, last_name))
-        affected_rows = CURSOR.rowcount
-        CONN.commit()
-        if affected_rows > 0:
-            print(f"Trainer {first_name} {last_name} deleted successfully.")
-        else:
-            print("Trainer not found or already deleted.")
-
+        CURSOR.execute(sql)
+        rows = CURSOR.fetchall()
+        trainers = []
+        for row in rows:
+            trainer = cls.instance_from_db(row)
+            trainers.append(trainer)
+        return trainers

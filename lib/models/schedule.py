@@ -33,7 +33,7 @@ class Schedule:
         return self._program_id
     @program_id.setter
     def program_id(self, value):
-        if isinstance(value, int) and Program.find_by_id(value):
+        if isinstance(value, int):
             self._program_id = value
         else:
             raise Exception("program_id must reference a program in the database.")
@@ -43,7 +43,7 @@ class Schedule:
         return self._member_id
     @member_id.setter
     def member_id(self, value):
-        if isinstance(value, int) and Member.find_by_id(value):
+        if isinstance(value, int):
             self._member_id = value
         else:
             raise Exception("member_id must reference a member in the database.")
@@ -83,7 +83,7 @@ class Schedule:
         return self._end_time
     @end_time.setter
     def end_time(self, value):
-        if isinstance(value, str) and len(value) == 4:
+        if isinstance(value, str) and len(value) == 4 and int(value) > int(self.start_time):
             self._end_time = value
         else:
             raise Exception("end_time must be of type string and must be 4 digits long.  Format: 24hr (HHMM).")
@@ -190,5 +190,8 @@ class Schedule:
         return cls.instance_from_db(row) if row else None
     
     @classmethod
-    def fetch_table(cls):
-        pass
+    def get_all(cls):
+        sql = """
+            SELECT * FROM schedules;
+        """
+        return [cls.instance_from_db(row) for row in CURSOR.execute(sql).fetchall()]
