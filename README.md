@@ -50,4 +50,4 @@ https://trello.com/b/KyUFcJNo/phase-3
   - Such as, being able to look up all of the instances of Schedule a member is attached to
 - Create a GUI that will contain calendar and pop up when selecting the date when adding a new instance of Schedule
 - Have unique designs for each sub menu
-- Further explore adding functions to helpers.py
+- Further explore adding functions to helpers.pyI
